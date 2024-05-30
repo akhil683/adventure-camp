@@ -1,10 +1,18 @@
 import React from 'react'
+import Header from '../components/Home/Header'
+import Navbar from '../components/Navbar'
+import Activities from '../components/Home/Activities'
+import Vehicles from '../components/Home/Vehicles'
+import Products from '../components/Home/Products'
 
 const Home = () => {
   return (
-    <div>
-      Home 
-    </div>
+    <>
+      <Header/> 
+      <Activities />
+      <Vehicles />
+      <Products />
+    </>
   )
 }
 

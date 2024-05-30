@@ -5,6 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      roboto: ['Roboto', 'sans-serif'],
+      poppins: ['Poppins', 'sans-serif'],
+      bebasNeue: ['Bebas Neue', 'sans-serif'],
+    },
     extend: {},
   },
   plugins: [],
