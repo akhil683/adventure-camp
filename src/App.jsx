@@ -13,5 +13,5 @@ const App = () => {
     </div>
   )
 }
-//EXPLORE NATURE WITH [BRAND NAME]
+
 export default App
