@@ -14,6 +14,9 @@ import Signup from './pages/Signup.jsx'
 import AllProducts from './pages/AllProducts.jsx'
 import Product from './pages/Product.jsx'
 import Cart from './pages/Cart.jsx'
+import Activity from './pages/Activity.jsx'
+import RentVehicle from './pages/RentVehicle.jsx'
+import Orders from './pages/Orders.jsx'
 
 const router = createBrowserRouter([
   {
@@ -49,6 +52,22 @@ const router = createBrowserRouter([
         )
       },
       {
+        path: "/activities",
+        element: (
+          <ProtectedLayout authentication={false}>
+            <Activity />
+          </ProtectedLayout>
+        )
+      },
+      {
+        path: "/rent-vehicles",
+        element: (
+          <ProtectedLayout authentication={false}>
+            <RentVehicle />
+          </ProtectedLayout>
+        )
+      },
+      {
         path: "/product/:slug",
         element: (
           <ProtectedLayout authentication={false}>
@@ -57,10 +76,26 @@ const router = createBrowserRouter([
         )
       },
       {
+        path: "/orders",
+        element: (
+          <ProtectedLayout authentication={true}>
+            <Orders />
+          </ProtectedLayout>
+        )
+      },
+      {
         path: "/cart",
         element: (
           <ProtectedLayout authentication={true}>
             <Cart />
+          </ProtectedLayout>
+        )
+      },
+      {
+        path: "/checkout",
+        element: (
+          <ProtectedLayout authentication={true}>
+            <Orders />
           </ProtectedLayout>
         )
       },

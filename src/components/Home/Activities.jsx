@@ -12,7 +12,7 @@ const Activities = () => {
 
 
          <div className='md:pt-48 text-lg max-w-[400px]'>
-            <p><span className='text-4xl font-semibold text-red-500'>D</span>iscover the Great Outdoors fun activites like </p>
+            <p><span className='text-4xl font-semibold text-red-500'>D</span> iscover the Great Outdoors fun activites like </p>
             <ul className='my-6 px-2 text-base'>
                <li>- Paragliding</li>
                <li>- Rafting</li>
@@ -21,12 +21,12 @@ const Activities = () => {
                <li>- Camping</li>
                <li>- Downhill Cycling</li>
             </ul>
-            <Link>
+            <Link to='/activities'>
                <Button color='red'>Explore Activities</Button>
             </Link>
          </div>
 
-         <h2 className='md:absolute md:top-[20%] left-0 md:text-7xl text-4xl font-semibold text-green-600 max-w-[900px] z-20'>Nature's Playground: Adventure Activities</h2>
+         <h2 className='lg:absolute md:top-[20%] left-0 lg:text-7xl md:text-5xl text-4xl font-semibold text-green-600 max-w-[900px] z-20'>Nature's Playground: Adventure Activities</h2>
 
          <div className=' md:h-[500px] h-[250px] md:w-[700px] w-[400px] relative'>
             <img src={activitiesImg} alt="Adventure Activities" className='absolute h-full w-full object-cover' />
