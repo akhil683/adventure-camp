@@ -1,11 +1,12 @@
 import React from 'react'
 import productImg from '../../assets/MainImg.jpg'
 import { FaShoppingCart } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 const ProductCard = () => {
   return (
-    <div className='sm:max-w-[300px] w-full px-2 py-4  rounded-lg'>
-      <div className='w-full sm:h-[220px] h-[250px]'>
+    <Link to='/product'  className='sm:max-w-[300px] w-full p-4  rounded-lg hover:bg-gray-200 hover:shadow-2xl hover:shadow-gray-300 duration-200'>
+      <div className='w-full sm:h-[220px] h-[250px] rounded-lg overflow-hidden'>
          <img src={productImg} className='w-full h-full object-cover' alt="" />    
       </div>         
       <div className='px-2 pt-2'>
@@ -16,7 +17,7 @@ const ProductCard = () => {
             <FaShoppingCart /> Add to Cart
          </button>
       </div>
-    </div>
+    </Link>
   )
 }
 

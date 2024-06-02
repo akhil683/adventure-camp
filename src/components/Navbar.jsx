@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from "../assets/logo.png"
 
 import { MdAccountCircle } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
+import { CgMenuRight } from "react-icons/cg";
+import MobileMenu from './MobileMenu';
 
 const Navbar = () => {
+   const [ showMenu, setShowMenu ] = useState(false)
+   const toggleMenu = () => {
+      setShowMenu(!showMenu)
+   }
+
   return (
     <nav className='w-full font-bebasNeue px-6 py-4 md:py-3    bg-white flex  items-center justify-between lg:justify-center lg:gap-20 gap-6 fixed z-50'>
 
@@ -46,10 +53,10 @@ const Navbar = () => {
             Log In 
          </Link>
 
-         {/* <Link>
-            <p className='font-roboto bg-green-500 px-1 rounded-full flex items-center gap-1'><MdAccountCircle />Log In</p>
-         </Link>  */}
-
+         <button className='text-3xl md:hidden' onClick={toggleMenu}>
+            <CgMenuRight />            
+         </button>
+      <MobileMenu showMenu={showMenu} toggleMenu={toggleMenu} />
       </div>
     </nav>
   )
