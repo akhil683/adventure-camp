@@ -8,10 +8,7 @@ const AllProducts = () => {
 
   return (
     <Container>
-      <div className='flex justify-between flex-wrap items-center p-12 max-md:px-4 pb-4'>
-        <h2 className='md:text-5xl text-2xl font-bebasNeue'>All Products</h2>
-        <DropDownPlaces products={products} />
-      </div>
+        <h2 className='md:text-5xl text-2xl pt-12 px-20 max-md:px-4 font-bebasNeue'>All Products</h2>
       <div className='flex flex-wrap justify-center items-center gap-6'>
         <ProductCard />       
         <ProductCard />       
