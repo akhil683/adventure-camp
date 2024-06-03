@@ -18,7 +18,7 @@ const ProductCard = () => {
          </div>
          <p className='text-xs'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat</p>
          <p className='font-semibold font-bebasNeue text-2xl my-1'><strike className='text-lg text-gray-600 mr-2'>$16.99</strike>$12.99</p>
-         <button className='flex justify-center items-center gap-2 text-lg font-roboto w-full py-2 rounded-lg bg-green-600 text-white'>
+         <button className='flex justify-center items-center gap-2 uppercase font-roboto w-full py-2 rounded-lg bg-green-600 hover:bg-black duration-200 text-white'>
             <FaShoppingCart /> Add to Cart
          </button>
       </div>

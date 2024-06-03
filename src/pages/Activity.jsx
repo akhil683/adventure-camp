@@ -4,7 +4,7 @@ import Container from '../components/Container'
 import ActivityCard from '../components/ActivityCard'
 
 const Activity = () => {
-  const products = ['All Products','Manali, Himachal Pradesh', 'Shimla, Himachal Pradesh', 'Massorie, Utrakhand', 'Dharamshala, Himachal Pradesh']
+  const products = ['All Regions','Manali, Himachal Pradesh', 'Shimla, Himachal Pradesh', 'Massorie, Utrakhand', 'Dharamshala, Himachal Pradesh']
 
   return (
     <Container>
