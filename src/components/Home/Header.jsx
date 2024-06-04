@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import heroImg from "../../assets/MainImg.jpg"
 import Button from '../Button'
 import FadeDown from '../Framer/FadeDown'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
+  const { status } = useSelector(state => state.auth)
   return (
       <div className='h-screen'>
             <img src={heroImg} className='-z-10 w-full object-cover bottom-0 h-full absolute opacity-60' alt="Camping in Mountains" />
@@ -19,9 +21,11 @@ const Header = () => {
                 <Link to='/all-products'>
                   <Button>Explore</Button> 
                 </Link>
-                <Link to='/signup'>
-                  <Button>Sign Up</Button> 
-                </Link>
+                {!status &&
+                  <Link to='/signup'>
+                    <Button>Sign Up</Button> 
+                  </Link>
+                }
               </div>
                 </FadeDown>
             </div>

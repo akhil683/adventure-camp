@@ -5,13 +5,38 @@ import { MdKeyboardBackspace } from "react-icons/md";
 import authService from "../utils/auth";
 
 import logo from "../assets/logo.png"
-import login from "../assets/login.jpg"
+import loginImg from "../assets/login.jpg"
 import Input from "../components/Form/Input.jsx"
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "../store/authSlice.js";
 
 const Login = () => {
-  // const [loggedInUser, setLoggedInUser] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+const dispatch = useDispatch()
+const navigate = useNavigate()
+ const [ form, setForm ] = useState({
+  email: "",
+  password: '',
+}) 
+
+  const handleChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    setForm(values => ({...values, [name]: value}))
+  }
+
+  const handleSubmit = () => {
+    const user = authService.login(form)
+    const userData = authService.getCurrentUser()
+    console.log(userData);
+    if (userData) {
+      dispatch(login(userData));
+      navigate("/")
+    } else {
+
+    }
+  }
 
   return (
     <div className="absolute z-50 max-md:bg-gray-300 w-screen min-h-screen bg-white">
@@ -24,7 +49,7 @@ const Login = () => {
 
       <div className="relative flex justify-center items-center flex-col w-full md:w-[40%] bg-gray-300 h-[60vh] md:h-[85vh] rounded-lg p-4">
       <Link to={-1} className="absolute top-2 left-2">
-        <button className='duration-200 hover:bg-black hover:text-white rounded-full px-2 py-1 text-3xl'>
+        <button className='duration-200 hover:px-4 bg-black text-white rounded-full px-2 py-1 text-3xl'>
           <MdKeyboardBackspace />
         </button>
       </Link>
@@ -32,20 +57,22 @@ const Login = () => {
         <p className="text-sm mb-6 text-center">We are glad to see you back with us !</p>
       <form className="md:w-[270px] w-full font-roboto flex flex-col items-center justify-center gap-4 text-sm ">
         <Input
+          name="email" 
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.email}
+          onChange={handleChange}
         />
         <Input
+          name="password"
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.password}
+          onChange={handleChange}
         />
         <button
           type="button"
-          onClick={() => authService.login(email, password)}
+          onClick={handleSubmit}
           className="py-2 rounded-lg border-2 border-black hover:bg-green-600 hover:border-green-600 w-full bg-black text-white font-poppins uppercase duration-200"
         >
           Login
@@ -53,12 +80,12 @@ const Login = () => {
       </form>
       <p className="text-sm font-roboto mt-2">Don't have an account? <Link to="/signup" className="text-red-600 font-semibold">Sign Up</Link></p>
       <p className=" font-bebasNeue text-xl my-4">or</p>
-      <button className="md:w-[270px] w-full py-2 border-2 mb-2 border-black rounded-lg font-poppins text-sm">Login with Google</button>
+      <button onClick={alert} className="md:w-[270px] w-full py-2 border-2 mb-2 border-black rounded-lg font-poppins text-sm">Login with Google</button>
       <button className="md:w-[270px] w-full py-2 border-2 border-black rounded-lg font-poppins text-sm">Login with Facebook</button>
       </div>
 
         <div className="relative flex justify-center items-center max-md:hidden w-[50%] h-[85vh] rounded-lg overflow-hidden">
-          <img src={login} className=" w-full h-full absolute object-cover"  alt="Adventure Vault's Logo" />
+          <img src={loginImg} className=" w-full h-full absolute object-cover"  alt="Adventure Vault's Logo" />
         </div>
 
       </div>

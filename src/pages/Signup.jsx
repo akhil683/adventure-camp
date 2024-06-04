@@ -3,21 +3,43 @@ import { Link } from "react-router-dom";
 import { MdKeyboardBackspace } from "react-icons/md";
 
 import authService from "../utils/auth";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png"
-import login from "../assets/login.jpg"
+import loginImg from "../assets/login.jpg"
 import Input from "../components/Form/Input.jsx"
+import { login } from "../store/authSlice.js";
 
 const Signup = () => {
-  // const [loggedInUser, setLoggedInUser] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [ form, setForm ] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "", 
+  })
+
+  const handleChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    setForm(values => ({...values, [name]: value}))
+  }
+
+  const handleSubmit = () => {
+    const register = authService.createAccont(form)
+    const user = authService.login(form)
+    const userData = authService.getCurrentUser()
+    console.log(userData)
+    if (userData) {
+      dispatch(login(userData));
+      navigate("/")
+    }
+  }
 
   return (
-    <div className="absolute z-50 w-screen min-h-screen bg-white">
-      <Link to="/" className="z-40 py-2 px-4 flex items-center gap-6">
+    <div className="absolute z-50 max-md:bg-gray-300 w-screen min-h-screen bg-white">
+      <Link to="/" className="bg-white z-40 py-2 px-4 flex items-center gap-6">
         <img src={logo} alt="Adventure Vault's Logo" width={60} height={600} />
         <h2 className="text-2xl font-bebasNeue text-green-600">Adventure Vault</h2>
       </Link>
@@ -34,32 +56,36 @@ const Signup = () => {
         <p className="text-sm mb-6 text-center">We are glad to see you here !</p>
       <form className="md:w-[270px] w-full font-roboto flex flex-col items-center justify-center gap-4 text-sm ">
         <Input
+          name="name"
           type="text"
           placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={form.name}
+          onChange={handleChange}
         />
         <Input
+          name="email"
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.email}
+          onChange={handleChange}
         />
         <Input
+          name="password"
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.password}
+          onChange={handleChange}
         />
         <Input
-          type="Confirm Password"
+          name="confirmPassword"
+          type="password"
           placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={form.confirmPassword}
+          onChange={handleChange}
         />
         <button
           type="button"
-          onClick={() => authService.login(email, password)}
+          onClick={handleSubmit}
           className="py-2 rounded-lg border-2 border-black hover:bg-green-600 hover:border-green-600 w-full bg-black text-white font-poppins uppercase duration-200"
         >
           Register
@@ -72,7 +98,7 @@ const Signup = () => {
       </div>
 
         <div className=" relative flex justify-center items-center max-md:hidden w-[50%] h-[85vh] rounded-lg overflow-hidden">
-          <img src={login} className=" w-full h-full absolute object-cover"  alt="Adventure Vault's Logo" />
+          <img src={loginImg} className=" w-full h-full absolute object-cover"  alt="Adventure Vault's Logo" />
         </div>
 
       </div>

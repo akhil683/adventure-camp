@@ -4,15 +4,19 @@ import { Link } from 'react-router-dom'
 import { MdKeyboardBackspace } from "react-icons/md"
 import ReactStars from "react-rating-stars-component"
 import { FaShoppingCart } from 'react-icons/fa'
+import toast, { Toaster } from 'react-hot-toast'
 
 const Product = () => {
   const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const alert = () => {
+    toast.success("Added to the Cart !")
+  }
 
   return (
     <div className='bg-white text-black min-h-screen p-16 max-sm:px-6'>
-
+      <Toaster position='top-center' />
       <Link to={-1}>
-        <button className='duration-200 hover:bg-black hover:text-white rounded-full px-2 py-1 text-3xl'>
+        <button className='duration-200 bg-black text-white rounded-full px-2 hover:px-4 py-1 text-3xl'>
           <MdKeyboardBackspace />
         </button>
         </Link>
@@ -59,7 +63,7 @@ const Product = () => {
             </select>
           </div>
 
-         <button className='flex justify-center items-center gap-2 text-xl font-roboto w-full py-2 my-4 rounded-lg hover:bg-green-600 bg-black duration-200 text-white'>
+         <button onClick={alert} className='flex justify-center items-center gap-2 text-xl font-roboto w-full py-2 my-4 rounded-lg hover:bg-green-600 bg-black duration-200 text-white'>
             <FaShoppingCart /> Add to Cart
          </button>
          <p className='text-sm font-roboto'>Free delivery on orderes above $50</p>

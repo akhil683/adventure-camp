@@ -7,10 +7,18 @@ import { TbActivityHeartbeat, TbTruckDelivery } from "react-icons/tb";
 import { RiMotorbikeFill } from "react-icons/ri";
 
 import logo from "../assets/logo.png";
+import authService from "../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 const MobileMenu = ({ showMenu, toggleMenu }) => {
   const show = showMenu ? "right-0" : "-right-[100%]";
   const bgShow = showMenu ? "block" : "hidden";
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    authService.logout()
+    navigate("/") 
+  }
 
   return (
     <>
@@ -98,6 +106,13 @@ const MobileMenu = ({ showMenu, toggleMenu }) => {
           Log In
           <MdOutlineLogin />
         </Link>
+        <button
+          onClick={handleLogOut}
+          className="mt-4 flex gap-3 justify-center items-center py-3 w-full font-roboto bg-black text-white text-xl rounded-lg"
+        >
+          Log Out
+          <MdOutlineLogin />
+        </button>
       </div>
     </>
   );
