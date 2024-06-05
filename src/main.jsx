@@ -17,6 +17,7 @@ import Cart from './pages/Cart.jsx'
 import Activity from './pages/Activity.jsx'
 import RentVehicle from './pages/RentVehicle.jsx'
 import Orders from './pages/Orders.jsx'
+import BookingDetail from './pages/BookingDetail.jsx'
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedLayout authentication={false}>
             <Product />
+          </ProtectedLayout>
+        )
+      },
+      {
+        path: "/booking",
+        element: (
+          <ProtectedLayout authentication={false}>
+            <BookingDetail />
           </ProtectedLayout>
         )
       },

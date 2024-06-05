@@ -27,13 +27,13 @@ const Signup = () => {
   }
 
   const handleSubmit = () => {
-    const register = authService.createAccont(form)
+    const register = authService.createAccount(form)
     const user = authService.login(form)
-    const userData = authService.getCurrentUser()
+    // const userData = authService.getCurrentUser()
     console.log(userData)
     if (userData) {
-      dispatch(login(userData));
-      navigate("/")
+      // dispatch(login(userData));
+      // navigate("/")
     }
   }
 
@@ -46,13 +46,13 @@ const Signup = () => {
 
       <div className=" flex p-8  py-2 justify-center items-center w-full gap-4">
 
-      <div className="relative flex justify-center items-center flex-col w-full md:w-[40%] bg-gray-300 h-[70vh] md:h-[85vh] rounded-lg p-4">
+      <div className="relative flex justify-center items-center flex-col w-full md:w-[40%] bg-gray-300 h-[85vh] md:h-[85vh] rounded-lg p-4">
       <Link to={-1} className="absolute top-2 left-2">
-        <button className='duration-200 hover:bg-black hover:text-white rounded-full px-2 py-1 text-3xl'>
+        <button className='duration-200 bg-black hover:px-4 text-white rounded-full px-2 py-1 text-3xl'>
           <MdKeyboardBackspace />
         </button>
       </Link>
-        <h3 className="text-center text-3xl font-roboto font-semibold">Register Your Account</h3>
+        <h3 className="text-center text-2xl md:text-3xl font-roboto font-semibold">Register Your Account</h3>
         <p className="text-sm mb-6 text-center">We are glad to see you here !</p>
       <form className="md:w-[270px] w-full font-roboto flex flex-col items-center justify-center gap-4 text-sm ">
         <Input

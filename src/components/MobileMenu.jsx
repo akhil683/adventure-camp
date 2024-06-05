@@ -9,14 +9,17 @@ import { RiMotorbikeFill } from "react-icons/ri";
 import logo from "../assets/logo.png";
 import authService from "../utils/auth";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/authSlice";
 
 const MobileMenu = ({ showMenu, toggleMenu }) => {
+  const dispatch = useDispatch()
   const show = showMenu ? "right-0" : "-right-[100%]";
   const bgShow = showMenu ? "block" : "hidden";
   const navigate = useNavigate()
 
   const handleLogOut = () => {
-    authService.logout()
+    dispatch(logout())
     navigate("/") 
   }
 
@@ -42,9 +45,9 @@ const MobileMenu = ({ showMenu, toggleMenu }) => {
           <p className="text-3xl text-green-600">Adventure Vault</p>
         </div>
 
-        <hr className="bg-gray-300 h-[2px] my-8" />
+        <hr className="bg-gray-300 h-[2px] my-6" />
 
-        <ul className=" pl-4 text-xl flex flex-col gap-4">
+        <ul className=" pl-4 text-xl flex flex-col gap-2">
           <li>
             <Link
               onClick={toggleMenu}
@@ -97,7 +100,7 @@ const MobileMenu = ({ showMenu, toggleMenu }) => {
           </li>
         </ul>
 
-        <hr className="bg-gray-300 h-[2px] my-8" />
+        <hr className="bg-gray-300 h-[2px] my-6" />
         <Link
          onClick={toggleMenu}
           to="/login"

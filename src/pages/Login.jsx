@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdKeyboardBackspace } from "react-icons/md";
 
-import authService from "../utils/auth";
-
 import logo from "../assets/logo.png"
 import loginImg from "../assets/login.jpg"
 import Input from "../components/Form/Input.jsx"
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../store/authSlice.js";
+import authService from "../utils/auth.js";
 
 const Login = () => {
 
 const dispatch = useDispatch()
 const navigate = useNavigate()
- const [ form, setForm ] = useState({
+const [ loading, setLoading ] = useState(false) 
+const [ form, setForm ] = useState({
   email: "",
   password: '',
 }) 
@@ -27,15 +27,15 @@ const navigate = useNavigate()
   }
 
   const handleSubmit = () => {
+    setLoading(true)
     const user = authService.login(form)
     const userData = authService.getCurrentUser()
-    console.log(userData);
-    if (userData) {
-      dispatch(login(userData));
-      navigate("/")
-    } else {
-
+    if (user) {
+      console.log(user)
+      dispatch(login(userData))
     }
+    setLoading(false)
+    navigate("/")
   }
 
   return (
@@ -47,13 +47,13 @@ const navigate = useNavigate()
 
       <div className="flex p-8 py-2 justify-center items-center w-full gap-4">
 
-      <div className="relative flex justify-center items-center flex-col w-full md:w-[40%] bg-gray-300 h-[60vh] md:h-[85vh] rounded-lg p-4">
+      <div className="relative flex justify-center items-center flex-col w-full md:w-[40%] bg-gray-300 h-[80vh] md:h-[85vh] rounded-lg p-4">
       <Link to={-1} className="absolute top-2 left-2">
         <button className='duration-200 hover:px-4 bg-black text-white rounded-full px-2 py-1 text-3xl'>
           <MdKeyboardBackspace />
         </button>
       </Link>
-        <h3 className="text-center text-3xl font-roboto font-semibold">Login To Your Account</h3>
+        <h3 className="text-center text-2xl md:text-3xl font-roboto font-semibold">Login To Your Account</h3>
         <p className="text-sm mb-6 text-center">We are glad to see you back with us !</p>
       <form className="md:w-[270px] w-full font-roboto flex flex-col items-center justify-center gap-4 text-sm ">
         <Input
@@ -75,7 +75,7 @@ const navigate = useNavigate()
           onClick={handleSubmit}
           className="py-2 rounded-lg border-2 border-black hover:bg-green-600 hover:border-green-600 w-full bg-black text-white font-poppins uppercase duration-200"
         >
-          Login
+          {loading ? "Loading..." : "Login"}
         </button>
       </form>
       <p className="text-sm font-roboto mt-2">Don't have an account? <Link to="/signup" className="text-red-600 font-semibold">Sign Up</Link></p>

@@ -1,7 +1,6 @@
 import React from 'react'
 import ProductCard from '../components/products/ProductCard'
 import Container from '../components/Container'
-import DropDownPlaces from '../components/DropDownPlaces'
 import toast, { Toaster } from 'react-hot-toast'
 
 const AllProducts = () => {

@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa";
 
 const ActivityCard = () => {
   return (
-    <Link className='sm:max-w-[300px] w-full p-4  rounded-lg hover:bg-gray-200 hover:shadow-2xl hover:shadow-gray-300 duration-200'>
+    <Link to="/booking" className='sm:max-w-[300px] w-full p-4  rounded-lg hover:bg-gray-200 hover:shadow-2xl hover:shadow-gray-300 duration-200'>
       <div className='w-full sm:h-[220px] h-[250px] rounded-lg overflow-hidden'>
          <img src={activityImg} className='w-full h-full object-cover' alt="" />    
       </div>         

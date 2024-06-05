@@ -23,7 +23,6 @@ const Navbar = () => {
       setShowMenu(!showMenu)
    }
    const handleLogOut = () => {
-      authService.logout()
       dispatch(logout())
    }
 

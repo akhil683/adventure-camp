@@ -7,28 +7,26 @@ export class AuthService {
 
    constructor() {
       this.client
-         .setEndpoint("https://cloud.appwrite.io/v1")
-         .setProject("6654dfce001bcc68e54c")
+         .setEndpoint(config.appwriteUrl)
+         .setProject(config.appwriteProjectId)
       this.account = new Account(this.client)
    }
 
-   async createAccont({ email, password, name }) {
+   async createAccount({ email, password, name }) {
       try {
          const userAccount = await this.account.create(ID.unique(), email, password, name)
          if (userAccount) {
             return this.login({email, password})
-         } else {
-            return userAccount
          }
       } catch (err) {
-         throw err
+         console.log("Appwrite service:: createAccount() ::", err)
       } 
    }
    async login({ email, password }) {
       try {
          return await this.account.createEmailPasswordSession(email, password)
       } catch (err) {
-         throw err
+         console.log("Appwrite service:: login() :: ", err )
       }
    }
    async getCurrentUser() {
@@ -42,7 +40,7 @@ export class AuthService {
       try {
          await this.account.deleteSessions()
       } catch (err) {
-
+         console.log("Appwrive service:: logout() ::", err)
       }
    }
 }
