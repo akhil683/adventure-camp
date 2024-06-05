@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { MdKeyboardBackspace } from "react-icons/md";
-
-import authService from "../utils/auth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import { FcGoogle } from "react-icons/fc";
+import { MdKeyboardBackspace } from "react-icons/md";
+import { FaFacebook } from "react-icons/fa";
+
 import logo from "../assets/logo.png"
 import loginImg from "../assets/login.jpg"
 import Input from "../components/Form/Input.jsx"
-import { login } from "../store/authSlice.js";
+import authService from "../utils/auth";
+import { login, logout } from "../store/authSlice.js";
 
 const Signup = () => {
+  const [ loading, setLoading ] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [ form, setForm ] = useState({
@@ -27,16 +31,22 @@ const Signup = () => {
   }
 
   const handleSubmit = () => {
-    const register = authService.createAccount(form)
-    const user = authService.login(form)
-    // const userData = authService.getCurrentUser()
-    console.log(userData)
-    if (userData) {
-      // dispatch(login(userData));
-      // navigate("/")
-    }
-  }
+    setLoading(true)
+    authService.login(form)
 
+    authService.getCurrentUser()
+    .then((userData) => {
+      if (userData) {
+        dispatch(login({userData}))
+      } else {
+        dispatch(logout())
+      }
+    })
+    .finally(() => {
+      setLoading(false)
+      navigate("/")
+    })
+  }
   return (
     <div className="absolute z-50 max-md:bg-gray-300 w-screen min-h-screen bg-white">
       <Link to="/" className="bg-white z-40 py-2 px-4 flex items-center gap-6">
@@ -88,13 +98,28 @@ const Signup = () => {
           onClick={handleSubmit}
           className="py-2 rounded-lg border-2 border-black hover:bg-green-600 hover:border-green-600 w-full bg-black text-white font-poppins uppercase duration-200"
         >
-          Register
+          {loading ? "Loading..." : "Register"}
         </button>
       </form>
-      <p className="text-sm font-roboto mt-2">Already have an account? <Link to="/login" className="text-red-600 font-semibold">Login</Link></p>
+
+      <p className="text-sm font-roboto mt-2">
+        Already have an account? 
+        <Link to="/login" className="text-red-600 font-semibold">
+          Login
+        </Link>
+      </p>
+
       <p className=" font-bebasNeue text-xl my-4">or</p>
-      <button className="md:w-[270px] w-full py-2 border-2 mb-2 border-black rounded-lg font-poppins text-sm">Login with Google</button>
-      <button className="md:w-[270px] w-full py-2 border-2 border-black rounded-lg font-poppins text-sm">Login with Facebook</button>
+
+      <button onClick={alert} className="flex justify-center items-center gap-2 md:w-[270px] w-full py-2 border-2 mb-2 border-gray-800 text-gray-800 rounded-lg font-roboto text-sm">
+        <FcGoogle className="text-xl" />
+        Continue with Google
+      </button>
+
+      <button className="md:w-[270px] w-full py-2 border-2 border-gray-800 text-gray-800 flex justify-center items-center gap-2 rounded-lg font-roboto text-sm">
+        <FaFacebook className="text-xl" />
+        Continue with Facebook
+      </button>
       </div>
 
         <div className=" relative flex justify-center items-center max-md:hidden w-[50%] h-[85vh] rounded-lg overflow-hidden">

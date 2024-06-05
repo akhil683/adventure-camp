@@ -5,23 +5,24 @@ import { RxCross2 } from "react-icons/rx";
 import { MdCardTravel, MdOutlineLogin } from "react-icons/md";
 import { TbActivityHeartbeat, TbTruckDelivery } from "react-icons/tb";
 import { RiMotorbikeFill } from "react-icons/ri";
-
+import LogOutBtn from "./LogOutBtn";
 import logo from "../assets/logo.png";
 import authService from "../utils/auth";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/authSlice";
 
 const MobileMenu = ({ showMenu, toggleMenu }) => {
+  const { status, userData } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const show = showMenu ? "right-0" : "-right-[100%]";
   const bgShow = showMenu ? "block" : "hidden";
   const navigate = useNavigate()
 
-  const handleLogOut = () => {
-    dispatch(logout())
-    navigate("/") 
-  }
+  // const handleLogOut = () => {
+  //   dispatch(logout())
+  //   navigate("/") 
+  // }
 
   return (
     <>
@@ -101,21 +102,7 @@ const MobileMenu = ({ showMenu, toggleMenu }) => {
         </ul>
 
         <hr className="bg-gray-300 h-[2px] my-6" />
-        <Link
-         onClick={toggleMenu}
-          to="/login"
-          className="flex gap-3 justify-center items-center py-3 w-full font-roboto bg-black text-white text-xl rounded-lg"
-        >
-          Log In
-          <MdOutlineLogin />
-        </Link>
-        <button
-          onClick={handleLogOut}
-          className="mt-4 flex gap-3 justify-center items-center py-3 w-full font-roboto bg-black text-white text-xl rounded-lg"
-        >
-          Log Out
-          <MdOutlineLogin />
-        </button>
+        <LogOutBtn toggleMenu={toggleMenu} />
       </div>
     </>
   );

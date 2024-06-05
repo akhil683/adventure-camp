@@ -3,7 +3,7 @@ import logo from '../assets/logo.png'
 
 const Footer = () => {
   return (
-    <div className='pt-12'>
+    <footer className='pt-12'>
     <div className='px-8 text-white font-bebasNeue flex justify-around flex-wrap items-center gap-y-16'>
 
       <div className='max-md:w-full flex items-center flex-col'>
@@ -44,7 +44,7 @@ const Footer = () => {
 
     </div>
     <p className='text-gray-500 font-bebasNeue text-center my-10 text-sm'>&copy;2024 Adventure Vault. All Rights Reserved.</p>
-    </div>
+    </footer>
   )
 }
 

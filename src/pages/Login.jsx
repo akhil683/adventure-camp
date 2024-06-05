@@ -7,8 +7,10 @@ import loginImg from "../assets/login.jpg"
 import Input from "../components/Form/Input.jsx"
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../store/authSlice.js";
+import { login, logout } from "../store/authSlice.js";
 import authService from "../utils/auth.js";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
 
 const Login = () => {
 
@@ -28,18 +30,24 @@ const [ form, setForm ] = useState({
 
   const handleSubmit = () => {
     setLoading(true)
-    const user = authService.login(form)
-    const userData = authService.getCurrentUser()
-    if (user) {
-      console.log(user)
-      dispatch(login(userData))
-    }
-    setLoading(false)
-    navigate("/")
+    authService.login(form)
+
+    authService.getCurrentUser()
+    .then((userData) => {
+      if (userData) {
+        dispatch(login({userData}))
+      } else {
+        dispatch(logout())
+      }
+    })
+    .finally(() => {
+      setLoading(false)
+      navigate("/")
+    })
   }
 
   return (
-    <div className="absolute z-50 max-md:bg-gray-300 w-screen min-h-screen bg-white">
+    <div className=" absolute z-50 max-md:bg-gray-300 w-screen min-h-screen bg-white">
       <Link to="/" className="z-40 py-2 px-4 flex bg-white items-center gap-6">
         <img src={logo} alt="Adventure Vault's Logo" width={60} height={600} />
         <h2 className="text-2xl font-bebasNeue text-green-600">Adventure Vault</h2>
@@ -47,7 +55,7 @@ const [ form, setForm ] = useState({
 
       <div className="flex p-8 py-2 justify-center items-center w-full gap-4">
 
-      <div className="relative flex justify-center items-center flex-col w-full md:w-[40%] bg-gray-300 h-[80vh] md:h-[85vh] rounded-lg p-4">
+      <div className="relative flex justify-center items-center flex-col w-full md:w-[40%] bg-gray-300 h-[75vh] md:h-[85vh] rounded-lg p-4">
       <Link to={-1} className="absolute top-2 left-2">
         <button className='duration-200 hover:px-4 bg-black text-white rounded-full px-2 py-1 text-3xl'>
           <MdKeyboardBackspace />
@@ -78,10 +86,24 @@ const [ form, setForm ] = useState({
           {loading ? "Loading..." : "Login"}
         </button>
       </form>
-      <p className="text-sm font-roboto mt-2">Don't have an account? <Link to="/signup" className="text-red-600 font-semibold">Sign Up</Link></p>
+
+      <p className="text-sm font-roboto mt-2">
+        Don't have an account? 
+        <Link to="/signup" className="text-red-600 font-semibold">
+          Sign Up
+        </Link>
+        </p>
+
       <p className=" font-bebasNeue text-xl my-4">or</p>
-      <button onClick={alert} className="md:w-[270px] w-full py-2 border-2 mb-2 border-black rounded-lg font-poppins text-sm">Login with Google</button>
-      <button className="md:w-[270px] w-full py-2 border-2 border-black rounded-lg font-poppins text-sm">Login with Facebook</button>
+
+      <button onClick={alert} className="flex justify-center items-center gap-2 md:w-[270px] w-full py-2 border-2 mb-2 border-gray-800 text-gray-800 rounded-lg font-roboto text-sm">
+        <FcGoogle className="text-xl" />
+        Continue with Google
+      </button>
+      <button className="md:w-[270px] w-full py-2 border-2 border-gray-800 text-gray-800 flex justify-center items-center gap-2 rounded-lg font-roboto text-sm">
+        <FaFacebook className="text-xl" />
+        Continue with Facebook
+      </button>
       </div>
 
         <div className="relative flex justify-center items-center max-md:hidden w-[50%] h-[85vh] rounded-lg overflow-hidden">
