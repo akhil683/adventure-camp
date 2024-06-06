@@ -82,7 +82,7 @@ const MobileMenu = ({ showMenu, toggleMenu }) => {
           <li>
             <Link 
             onClick={toggleMenu}
-               to="/vehicles" 
+               to="/rent-vehicles" 
                className="flex py-2 gap-2 items-center"
             >
               <RiMotorbikeFill className="text-2xl" />
