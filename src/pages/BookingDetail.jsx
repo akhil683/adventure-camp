@@ -36,7 +36,6 @@ const BookingDetail = () => {
                   <p className='max-md:text-sm my-4'>The Royal Enfield Himalayan is an adventure touring motorcycle manufactured by Royal Enfield. It was revealed in February 2015 and launched in early 2016. The Himalayan is designed specifically for tackling tough terrain, with features like long travel suspension, good ground clearance, and a powerful engine that performs well at high altitudes. The Himalayan is a relatively lightweight bike, making it easier to handle on off-road sections and tight corners.</p>
                </div>
                <div className='rounded-lg md:w-[40%]'>
-                  {/* <p className='text-2xl font-semibold mb-4'>Specifications</p> */}
                   <table>
                      <tr>
                         <th>Specifications</th>

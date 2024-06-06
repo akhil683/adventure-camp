@@ -7,21 +7,19 @@ import authService from "./utils/auth"
 import { login, logout } from "./store/authSlice"
 
 const App = () => {
-  // const [ loading, setLoading ] = useState(false)
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
 
-  // useEffect(() => {
-  //   authService.getCurrentUser()
-  //   .then((userData) => {
-  //     if (userData) {
-  //       dispatch(login({userData}))
-  //     } else {
-  //       dispatch(logout())
-  //     }
-  //   })
-  //   .finally(() => setLoading(false))
-  // }, [])
+  useEffect(() => {
+    authService.getCurrentUser()
+    .then((userData) => {
+      if (userData) {
+        dispatch(login({userData}))
+      } else {
+        dispatch(logout())
+      }
+    })
+  }, [])
 
   return (
     <div>

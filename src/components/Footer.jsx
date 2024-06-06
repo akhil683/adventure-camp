@@ -4,7 +4,7 @@ import logo from '../assets/logo.png'
 const Footer = () => {
   return (
     <footer className='pt-12'>
-    <div className='px-8 text-white font-bebasNeue flex justify-around flex-wrap items-center gap-y-16'>
+    <div className='px-8 text-white font-roboto flex justify-around flex-wrap items-center gap-y-16 mb-8'>
 
       <div className='max-md:w-full flex items-center flex-col'>
         <img src={logo} className='w-44 mb-6' alt="Adventure Vault's Logo" />
@@ -16,7 +16,7 @@ const Footer = () => {
 
       <div>
         <p className='mb-2 text-2xl'>Products</p>
-        <ul className='text-lg text-gray-400'>
+        <ul className='text-gray-400'>
           <li><a href="">Camp Vault</a></li>
           <li><a href="">Activities</a></li>
           <li><a href="">Vehicles</a></li>
@@ -43,7 +43,7 @@ const Footer = () => {
       </div>
 
     </div>
-    <p className='text-gray-500 font-bebasNeue text-center my-10 text-sm'>&copy;2024 Adventure Vault. All Rights Reserved.</p>
+    <p className='text-gray-500 font-bebasNeue text-center my-4 text-sm'>&copy;2024 Adventure Vault. All Rights Reserved.</p>
     </footer>
   )
 }

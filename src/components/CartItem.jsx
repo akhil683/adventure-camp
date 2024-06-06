@@ -3,12 +3,13 @@ import Img from "../assets/campingImg.jpg"
 import ReactStars from "react-rating-stars-component"
 import { MdDelete } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const CartItem = () => {
   const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
   return (
-          <div className='w-full flex md:p-2  md:mb-4 mb-6 rounded-lg hover:bg-gray-100 duration-200'>
+          <Link to="/cart" className='w-full flex md:p-2  md:mb-4 mb-6 rounded-lg hover:bg-gray-100 duration-200'>
             <div className='md:w-[30%] w-[100px] h-[100px] md:h-[150px] rounded-lg overflow-hidden'>
               <img src={Img} alt="" className='w-full h-full object-cover' />
             </div>
@@ -47,7 +48,7 @@ const CartItem = () => {
               <p className='md:text-3xl text-lg font-bebasNeue text-red-600'><strike className="mr-2 md:text-base text-sm text-gray-600">&#8377;699</strike>&#8377;599</p>
               </div>
             </div>
-          </div>
+          </Link>
   )
 }
 
