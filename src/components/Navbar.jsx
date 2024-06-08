@@ -47,7 +47,7 @@ const Navbar = () => {
       <div className='text-lg flex justify-center items-center gap-6'>
          <Link 
             to='/cart' 
-            className='text-2xl hover:text-green-600 duration-200'
+            className='text-2xl hover:text-red-600 duration-200'
          >
             <FaShoppingCart />
          </Link>

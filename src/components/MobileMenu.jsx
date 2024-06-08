@@ -43,7 +43,7 @@ const MobileMenu = ({ showMenu, toggleMenu }) => {
             height={150}
             alt="Adventure Vault's Logo"
           />
-          <p className="text-3xl text-green-600">Adventure Vault</p>
+          <p className="text-3xl text-red-600">Adventure Vault</p>
         </div>
 
         <hr className="bg-gray-300 h-[2px] my-6" />

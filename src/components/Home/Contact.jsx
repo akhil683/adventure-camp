@@ -9,7 +9,7 @@ const Contact = () => {
          <p className='text-center'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, magnam dignissimos nesciunt minima autem aspernatur blanditiis neque praesentium nulla ipsa. Aliquam asperiores adipisci ut sed inventore quae. Veritatis eos saepe voluptas, atque blan</p>
       </div>  
       <div className='flex justify-center items-center'>
-         <button className='text-white bg-red-600 hover:bg-green-600 duration-200 rounded-lg px-12 md:text-3xl text-2xl py-6 flex gap-4'>
+         <button className='text-white bg-red-600 hover:bg-green-600 duration-200 rounded-lg md:px-12 px-8 md:text-3xl text-xl md:py-6 py-3 flex gap-4'>
             <IoCall />
             Contact Now
          </button>
