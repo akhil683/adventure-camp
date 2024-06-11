@@ -26,7 +26,7 @@ export class AuthService {
       try {
          return await this.account.createEmailPasswordSession(email, password)
       } catch (err) {
-         console.log("Appwrite service:: login() :: ", err )
+         alert("Appwrite service:: login() :: ", err )
       }
    }
    async getCurrentUser() {

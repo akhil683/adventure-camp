@@ -15,6 +15,7 @@ import { login, logout } from "../store/authSlice.js";
 
 const Signup = () => {
   const [ loading, setLoading ] = useState(false)
+  const [ samePassword, setSamePassword ] = useState(true)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [ form, setForm ] = useState({
@@ -30,22 +31,30 @@ const Signup = () => {
     setForm(values => ({...values, [name]: value}))
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (form.password !== form.confirmPassword) {
+      setSamePassword(false)
+      return
+    } else {
+      setSamePassword(true)
+    }
     setLoading(true)
-    authService.login(form)
-
-    authService.getCurrentUser()
-    .then((userData) => {
+    try {
+    await authService.createAccount(form)
+    const session = await authService.login(form)
+    if (session) {
+    const userData = await authService.getCurrentUser()
       if (userData) {
         dispatch(login({userData}))
+        navigate("/")
       } else {
         dispatch(logout())
       }
-    })
-    .finally(() => {
-      setLoading(false)
-      navigate("/")
-    })
+    }
+    } catch (err) {
+      alert("Something went wrong:: " + err)
+    }
+    setLoading(false)
   }
   return (
     <div className="absolute z-50 max-md:bg-gray-300 w-screen min-h-screen bg-white">
@@ -93,6 +102,9 @@ const Signup = () => {
           value={form.confirmPassword}
           onChange={handleChange}
         />
+        {!samePassword && 
+          <p className="text-red-600">Password does not match !</p>
+        }
         <button
           type="button"
           onClick={handleSubmit}

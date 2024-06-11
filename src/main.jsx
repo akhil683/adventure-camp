@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: "/product",
+        path: "/product/:id",
         element: (
           <ProtectedLayout authentication={false}>
             <Product />

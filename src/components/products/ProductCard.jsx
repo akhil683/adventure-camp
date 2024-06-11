@@ -4,11 +4,11 @@ import { FaShoppingCart, FaStar } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 const ProductCard = ({ handleCart, product }) => {
-   const { name, image, price, rating, description } = product;
+   const { name, image, price, rating, id, description } = product;
 
   return (
     <div className='sm:max-w-[280px] w-full flex flex-col justify-between p-4 max-sm:px-8  rounded-lg hover:bg-gray-200 hover:shadow-2xl hover:shadow-gray-400 duration-200 font-roboto md:h-[420px]'>
-      <Link to="/product" className='h-full'>
+      <Link to={`/product/${id}`} className='h-full'>
       <div className='w-full h-[180px] rounded-lg overflow-hidden'>
          <img src={image} className='w-full h-full object-cover' alt="" />    
       </div>         

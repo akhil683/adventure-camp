@@ -12,7 +12,7 @@ export default {
     },
     extend: {
       animation: {
-        image: "spin 5s ease-in-out infinite",
+        image: "spin 3s ease-in-out infinite",
       },
       keyframes: {
         spin: {

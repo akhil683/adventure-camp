@@ -7,7 +7,7 @@ import loginImg from "../assets/login.jpg"
 import Input from "../components/Form/Input.jsx"
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login, logout } from "../store/authSlice.js";
+import { login as authLogin, logout } from "../store/authSlice.js";
 import authService from "../utils/auth.js";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
@@ -28,22 +28,23 @@ const [ form, setForm ] = useState({
     setForm(values => ({...values, [name]: value}))
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setLoading(true)
-    authService.login(form)
-
-    authService.getCurrentUser()
-    .then((userData) => {
+    try {
+    const session = await authService.login(form)
+    if (session) {
+      const userData = await authService.getCurrentUser()
       if (userData) {
-        dispatch(login({userData}))
+        dispatch(authLogin({userData}))
+        setLoading(false)
+        navigate("/")
       } else {
         dispatch(logout())
       }
-    })
-    .finally(() => {
-      setLoading(false)
-      navigate("/")
-    })
+    }
+    } catch (e) {
+      alert("Error:" + e.message)
+    }
   }
 
   return (

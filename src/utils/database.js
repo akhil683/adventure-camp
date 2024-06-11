@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { Client, Databases, Databases, Storage, Query, ID} from "appwrite";
+import { Client, Databases, Storage, Query, ID} from "appwrite";
 
 export class Service {
 
@@ -16,7 +16,7 @@ export class Service {
       this.bucket = new Storage(this.client)
    }
 
-   async getPost(slug) {
+   async getData(slug) {
       try {
          return await this.databases.getDocument(
             config.appwriteDatabaseId, 
@@ -28,18 +28,17 @@ export class Service {
       }
    }
 
-   async getPosts(queries = [Query.equal("status", "active")]) {
+   async getAllData(collectionId) {
       try {
          return await this.databases.listDocuments(
             config.appwriteDatabaseId, 
-            config.appwriteCollectionId, 
-            queries
+            collectionId,
          )
       } catch (err) {
          console.log("Appwrite service:: getPosts():: ", err)
       }
    }
-   async createPost({ title, slug, content, featuredImage, status, userId}) {
+   async createData({ title, slug, content, featuredImage, status, userId}) {
       try {
          return await this.databases.createDocument(
             config.appwriteDatabaseId,
@@ -53,7 +52,7 @@ export class Service {
          console.log("Appwrite service:: createPost():: ", err)
       }
    }
-   async updatePost(slug, { title, content, featuredImage, status, userId }) {
+   async updateData(slug, { title, content, featuredImage, status, userId }) {
       try {
          return await this.databases.updateDocument(
             config.appwriteDatabaseId,
@@ -67,7 +66,7 @@ export class Service {
          console.log("Appwrite service:: updatePost():: ", err)
       }
    }
-   async deletePost(slug) {
+   async deleteData(slug) {
       try {
          await this.databases.deleteDocument(
             config.appwriteDatabaseId,
