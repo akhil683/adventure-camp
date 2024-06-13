@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import campingImg from "../assets/campingImg.jpg"
-import { Link, useParams, useSearchParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { MdKeyboardBackspace } from "react-icons/md"
 import ReactStars from "react-rating-stars-component"
 import { FaShoppingCart } from 'react-icons/fa'
@@ -8,26 +8,25 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 
 const Product = () => {
+  const { id }  = useParams()
   const [ product, setProduct ] = useState({})
+  const { Products } = useSelector(state => state.Products)
 
   const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-  const alert = () => {
+
+  const addItemToCart = () => {
     toast.success("Added to the Cart !")
   }
-  const { Products } = useSelector(state => state.Products)
-  console.log(Products)
-  const { id }  = useParams()
 
   useEffect(() => {
     const getProduct = () => {
       const productInfo = Products?.find(product => product?.id == id)
-      console.log(productInfo)
       setProduct(productInfo)
     }
     getProduct()
   }, [])
 
-  const { name, description, price, actualPrice, Brand, rating, rated } = product;
+  const { name, description, price, actualPrice, Brand, Rating, rated } = product;
 
   return (
     <div className='bg-white text-black min-h-screen p-16 max-sm:px-6'>
@@ -53,10 +52,10 @@ const Product = () => {
           </p>
           <div className='flex items-center font-roboto text-gray-500 justify-between text-sm py-2'>
               <span className='flex items-center justify-center gap-2'>
-                {rating} 
+                {Rating} 
             <ReactStars
               count={5}
-              value={4}
+              value={Rating}
               edit={false}
               isHalf={true}
               // onChange={ratingChanged}
