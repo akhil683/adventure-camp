@@ -1,20 +1,20 @@
 import React from 'react'
-import Header from '../components/Home/Header'
+import Header from '../components/Home/Header.jsx'
 import Activities from '../components/Home/Activities'
 import Vehicles from '../components/Home/Vehicles'
 import Products from '../components/Home/Products'
-import Contact from '../components/Home/Contact'
+import Contact from "../components/Home/Contact";
 
 const Home = () => {
   return (
     <>
-      <Header/> 
+      <Header />
       <Activities />
       <Vehicles />
       <Products />
       <Contact />
     </>
-  )
-}
+  );
+};
 
 export default Home

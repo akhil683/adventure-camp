@@ -20,7 +20,7 @@ export class Service {
       try {
          return await this.databases.getDocument(
             config.appwriteDatabaseId, 
-            config.appwriteCollectionId, 
+            config.appwriteProductCollectionId, 
             slug
          )
       } catch (err) {
@@ -35,32 +35,28 @@ export class Service {
             collectionId,
          )
       } catch (err) {
-         console.log("Appwrite service:: getPosts():: ", err)
+         console.log("Appwrite service:: getAllData():: ", err)
       }
    }
-   async createData({ title, slug, content, featuredImage, status, userId}) {
+   async createData(data, collectionId) {
       try {
          return await this.databases.createDocument(
             config.appwriteDatabaseId,
-            config.appwriteCollectionId,
-            slug,
-            {
-               title, content, featuredImage, status, userId
-            }
+            collectionId,
+            ID.unique(),
+            data
          )
       } catch (err) {
-         console.log("Appwrite service:: createPost():: ", err)
+         console.log("Appwrite service:: createData():: ", err)
       }
    }
-   async updateData(slug, { title, content, featuredImage, status, userId }) {
+   async updateData(id, data, collectionId) {
       try {
          return await this.databases.updateDocument(
             config.appwriteDatabaseId,
-            config.appwriteCollectionId,
-            slug,
-            {
-               title, content, featuredImage, status
-            }
+            collectionId,
+            id,
+            data
          )
       } catch (err) {
          console.log("Appwrite service:: updatePost():: ", err)
