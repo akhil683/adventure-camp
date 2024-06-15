@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import ProductCard from '../components/products/ProductCard'
-import Container from '../components/Container'
-import toast, { Toaster } from 'react-hot-toast'
-import { useDispatch, useSelector } from 'react-redux'
-import { setProducts } from '../store/ProductSlice'
-import service from '../utils/database'
-import config from '../config/config'
-import SkeletonProduct from '../components/SkeletonProduct'
-import { addToCart } from "../store/CartSlice"
+import React, { useEffect, useState } from "react";
+import ProductCard from "../components/products/ProductCard";
+import Container from "../components/Container";
+import toast, { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { setProducts } from "../store/ProductSlice";
+import service from "../utils/database";
+import config from "../config/config";
+import SkeletonProduct from "../components/SkeletonProduct";
+import { addToCart } from "../store/CartSlice";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,9 @@ const AllProducts = () => {
   useEffect(() => {
     const getProductItems = async () => {
       setIsLoading(true);
-      const products = await service.getAllData(config.appwriteProductCollectionId);
+      const products = await service.getAllData(
+        config.appwriteProductCollectionId
+      );
       console.log(products?.documents);
       if (products) {
         dispatch(setProducts(products.documents));
@@ -60,4 +62,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts
+export default AllProducts;

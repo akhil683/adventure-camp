@@ -1,24 +1,24 @@
-import React from 'react'
-import Container from "../components/Container"
-import CartItem from '../components/CartItem';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from "react";
+import Container from "../components/Container";
+import CartItem from "../components/CartItem";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
-  const navigate = useNavigate()
-  const { cartItems, cartTotal } = useSelector(state => state.cart)
-  const total = cartTotal - cartTotal*0.1 + cartTotal*0.15 + 4
-  
+  const navigate = useNavigate();
+  const { cartItems, cartTotal } = useSelector((state) => state.cart);
+  const total = cartTotal - cartTotal * 0.1 + cartTotal * 0.15 + 4;
+
   return (
     <Container>
       <div className="flex max-md:flex-col gap-6 pt-12">
-        <div className="md:w-[70%] min-h-300px flex flex-col justify-center items-center w-full">
+        <div className="md:w-[70%] min-h-300px flex flex-col items-center w-full">
           {cartItems.length ? (
             cartItems?.map((cartItem) => (
               <CartItem cartItem={cartItem} key={cartItem.id} />
             ))
           ) : (
-            <h1 className="text-5xl font-semibold text-center">
+            <h1 className="text-5xl font-semibold text-center my-[10vh]">
               No Item in Cart
             </h1>
           )}
@@ -28,18 +28,18 @@ const Cart = () => {
             <p className="text-center text-2xl mb-4">Order Summary</p>
             <hr />
             <table>
-                <tbody>
-                  <tr>
+              <tbody>
+                <tr>
                   <td>Subtotal</td>
                   <td>{cartTotal}</td>
                 </tr>
                 <tr>
                   <td>Discount(10%)</td>
-                  <td>-{cartTotal * 0.1}</td>
+                  <td>-{(cartTotal * 0.1).toFixed(2)}</td>
                 </tr>
                 <tr>
                   <td>GST(15%)</td>
-                  <td>{cartTotal * 0.15}</td>
+                  <td>{(cartTotal * 0.15).toFixed(2)}</td>
                 </tr>
                 <tr>
                   <td>Shipping</td>
@@ -47,12 +47,12 @@ const Cart = () => {
                 </tr>
                 <tr className="font-semibold">
                   <td>Total</td>
-                  <td>{total}</td>
+                  <td>{total.toFixed(2)}</td>
                 </tr>
-                </tbody>
-              </table>
-              <p className="text-xs mt-2 text-red-600">
-                Free shipping above $200 purchase
+              </tbody>
+            </table>
+            <p className="text-xs mt-2 text-red-600">
+              Free shipping above $200 purchase
             </p>
             <button className="mt-8 uppercase bg-black text-white hover:bg-green-600 px-4 py-3 rounded-lg duration-200 w-full">
               Checkout
@@ -68,6 +68,6 @@ const Cart = () => {
       </div>
     </Container>
   );
-}
+};
 
-export default Cart
+export default Cart;

@@ -1,23 +1,24 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import { Provider } from 'react-redux'
-import store from './store/store.js'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
 
-import ProtectedLayout from './components/ProtectLayout.jsx'
-import Home from './pages/Home.jsx'
-import Login from './pages/Login.jsx'
-import Signup from './pages/Signup.jsx'
-import AllProducts from './pages/AllProducts.jsx'
-import Product from './pages/Product.jsx'
-import Cart from './pages/Cart.jsx'
-import Activity from './pages/Activity.jsx'
-import RentVehicle from './pages/RentVehicle.jsx'
-import Orders from './pages/Orders.jsx'
-import BookingDetail from './pages/BookingDetail.jsx'
+import ProtectedLayout from "./components/ProtectLayout.jsx";
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+import AllProducts from "./pages/AllProducts.jsx";
+import Product from "./pages/Product.jsx";
+import Cart from "./pages/Cart.jsx";
+import Activity from "./pages/Activity.jsx";
+import RentVehicle from "./pages/RentVehicle.jsx";
+import Orders from "./pages/Orders.jsx";
+import BookingDetail from "./pages/BookingDetail.jsx";
+import Wishlist from "./pages/Wishlist.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "/login",
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={false}>
             <Login />
           </ProtectedLayout>
-        )
+        ),
       },
       {
         path: "/signup",
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={false}>
             <Signup />
           </ProtectedLayout>
-        )
+        ),
       },
       {
         path: "/all-products",
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={false}>
             <AllProducts />
           </ProtectedLayout>
-        )
+        ),
       },
       {
         path: "/product/:id",
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={false}>
             <Product />
           </ProtectedLayout>
-        )
+        ),
       },
       {
         path: "/activities",
@@ -66,7 +67,7 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={false}>
             <Activity />
           </ProtectedLayout>
-        )
+        ),
       },
       {
         path: "/rent-vehicles",
@@ -74,7 +75,7 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={false}>
             <RentVehicle />
           </ProtectedLayout>
-        )
+        ),
       },
       {
         path: "/product/:slug",
@@ -82,7 +83,7 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={false}>
             <Product />
           </ProtectedLayout>
-        )
+        ),
       },
       {
         path: "/booking",
@@ -90,7 +91,7 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={false}>
             <BookingDetail />
           </ProtectedLayout>
-        )
+        ),
       },
       {
         path: "/orders",
@@ -98,7 +99,15 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={true}>
             <Orders />
           </ProtectedLayout>
-        )
+        ),
+      },
+      {
+        path: "/wishlist",
+        element: (
+          <ProtectedLayout authentication={true}>
+            <Wishlist />
+          </ProtectedLayout>
+        ),
       },
       {
         path: "/cart",
@@ -106,7 +115,7 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={false}>
             <Cart />
           </ProtectedLayout>
-        )
+        ),
       },
       {
         path: "/checkout",
@@ -114,17 +123,16 @@ const router = createBrowserRouter([
           <ProtectedLayout authentication={true}>
             <Orders />
           </ProtectedLayout>
-        )
+        ),
       },
-    ]
-  }
-])
+    ],
+  },
+]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </React.StrictMode>,
-  
-)
+  </React.StrictMode>
+);

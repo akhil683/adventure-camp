@@ -1,8 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { useSelector } from "react-redux";
+import { createSlice } from "@reduxjs/toolkit";
 import service from "../utils/database";
 import config from "../config/config";
-
 
 const initialState = {
   cartItems: [],
@@ -14,7 +12,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     getCartItems: (state, action) => {
-      state.cartItems = action.payload.documents
+      state.cartItems = action.payload.documents;
     },
     addToCart: (state, action) => {
       state.cartTotal = state.cartTotal + action.payload.price;
@@ -24,28 +22,59 @@ const cartSlice = createSlice({
       if (existingCartItem) {
         state.cartItems = state.cartItems.map((cartItem) =>
           cartItem.id === action.payload.id
-            ? (
-              { ...cartItem, quantity: cartItem.quantity + 1 }
-              (service.updateData(cartItem.id, cartItem, config.appwriteCartCollectionId))
-            )
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }(
+                service.updateData(
+                  cartItem.id,
+                  cartItem,
+                  config.appwriteCartCollectionId
+                )
+              )
             : cartItem
         );
-        service.updateData()
+        service.updateData();
       } else {
         state.cartItems = [
           ...state.cartItems,
-          { ...action.payload, quantity: 1},
+          { ...action.payload, quantity: 1 },
         ];
-        const { name, price, ActualPrice, Brand, description, quantity=1, Rating, id, imageURL,rated, userID="123sdjfk" } = action.payload
-        service.createData({name, price, ActualPrice, Brand, description, quantity, Rating, id, imageURL, rated,  userID}, config.appwriteCartCollectionId) 
-        console.log(action.payload)
+        const {
+          name,
+          price,
+          ActualPrice,
+          Brand,
+          description,
+          quantity = 1,
+          Rating,
+          id,
+          imageURL,
+          rated,
+          userID = "123sdjfk",
+        } = action.payload;
+        service.createData(
+          {
+            name,
+            price,
+            ActualPrice,
+            Brand,
+            description,
+            quantity,
+            Rating,
+            id,
+            imageURL,
+            rated,
+            userID,
+          },
+          config.appwriteCartCollectionId
+        );
+        console.log(action.payload);
       }
-      console.log(state.cartItems)
+      console.log(state.cartItems);
     },
-    updateItem: (state) => {},
+    updateQuantity: (state) => {},
     deleteItem: (state, action) => {
       state.cartTotal =
         state.cartTotal - action.payload.price * action.payload.quantity;
+      service.deleteData(action.payload.$id, config.appwriteCartCollectionId);
       state.cartItems = state.cartItems.filter(
         (cartItem) => cartItem.id !== action.payload.id
       );
@@ -53,5 +82,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { getCartItems, addToCart, updateItem, deleteItem } = cartSlice.actions;
-export default cartSlice.reducer
+export const { getCartItems, addToCart, updateQuantity, deleteItem } =
+  cartSlice.actions;
+export default cartSlice.reducer;
