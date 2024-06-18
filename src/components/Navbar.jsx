@@ -22,7 +22,9 @@ const Navbar = () => {
     <nav className="w-full font-bebasNeue px-6 py-4 md:py-3    bg-white flex  items-center justify-between lg:justify-center lg:gap-20 gap-6 fixed z-50">
       <Link className="gap-2 flex">
         <img src={Logo} alt="logo" width={40} className="-translate-y-1" />
-        <h2 className="uppercase text-2xl font-semibold">adventure vault</h2>
+        <h2 className="uppercase text-2xl max-md:text-xl font-semibold">
+          adventure vault
+        </h2>
       </Link>
 
       <ul className=" max-lg:hidden text-lg flex justify-center items-center lg:gap-6 gap-4">
@@ -43,7 +45,7 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <div className="text-lg flex justify-center items-center gap-6">
+      <div className="text-lg flex justify-center items-center md:gap-6 gap-3">
         <Link
           to="/wishlist"
           className="flex text-xl md:gap-2 gap-1 items-center px-2 py-1 rounded-md hover:text-red-600 hover:scale-105 duration-200"

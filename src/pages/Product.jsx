@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { MdKeyboardBackspace } from "react-icons/md";
 import ReactStars from "react-rating-stars-component";
 import { FaShoppingCart } from "react-icons/fa";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 const Product = () => {
@@ -13,10 +13,6 @@ const Product = () => {
 
   const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const addItemToCart = () => {
-    toast.success("Added to the Cart !");
-  };
-
   useEffect(() => {
     const getProduct = () => {
       const productInfo = Products?.find((product) => product?.id == id);
@@ -24,6 +20,7 @@ const Product = () => {
     };
     getProduct();
   }, []);
+
   const {
     name,
     description,
@@ -67,7 +64,6 @@ const Product = () => {
                 value={Rating}
                 edit={false}
                 isHalf={true}
-                // onChange={ratingChanged}
                 size={24}
                 activeColor="#16a34a"
               />

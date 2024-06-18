@@ -70,18 +70,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/rent-vehicles",
+        path: "/booking/:id",
         element: (
           <ProtectedLayout authentication={false}>
-            <RentVehicle />
+            <BookingDetail />
           </ProtectedLayout>
         ),
       },
       {
-        path: "/product/:slug",
+        path: "/rent-vehicles",
         element: (
           <ProtectedLayout authentication={false}>
-            <Product />
+            <RentVehicle />
           </ProtectedLayout>
         ),
       },

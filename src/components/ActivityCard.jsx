@@ -1,31 +1,31 @@
 import React from "react";
-import activityImg from "../assets/activities.jpg";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
-const ActivityCard = () => {
+const ActivityCard = ({ adventure }) => {
+  const { name, imageURL, price, ActualPrice, location, rating, $id } =
+    adventure;
   return (
     <Link
-      to="/booking"
+      to={`/booking/${$id}`}
       className="sm:max-w-[300px] w-full p-4  rounded-lg hover:shadow-2xl hover:shadow-gray-300 duration-200"
     >
       <div className="w-full sm:h-[220px] h-[250px] rounded-lg overflow-hidden">
-        <img src={activityImg} className="w-full h-full object-cover" alt="" />
+        <img src={imageURL} className="w-full h-full object-cover" alt="" />
       </div>
       <div className="flex justify-between">
-        <h3 className="text-3xl mt-2 font-semibold font-bebasNeue">
-          Paragliding
-        </h3>
+        <h3 className="text-3xl mt-2 font-semibold font-bebasNeue">{name}</h3>
         <span className="flex items-center">
-          <FaStar className="text-green-600" /> (4.5)
+          <FaStar className="text-green-600" /> ({rating})
         </span>
       </div>
       <p className="text-xs">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
       </p>
       <p className="font-semibold font-bebasNeue text-2xl my-1">
-        <strike className="text-lg text-gray-500 mr-2">$12.99</strike>$9.99
+        <strike className="text-lg text-gray-500 mr-2">{ActualPrice}</strike>
+        {price}
       </p>
       <div className="flex justify-between">
         <button className="flex w-[75%] justify-center items-center gap-2 text-lg font-roboto py-2 rounded-lg bg-green-600 text-white">
