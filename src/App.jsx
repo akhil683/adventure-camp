@@ -1,44 +1,35 @@
-import { Outlet } from "react-router-dom"
-import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
-import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
-import authService from "./utils/auth"
-import { login, logout } from "./store/authSlice"
-import service from "./utils/database"
-import config from "./config/config"
-import { getCartItems } from "./store/CartSlice"
+import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import authService from "./utils/auth";
+
+import { useDispatch } from "react-redux";
+import { login, logout } from "./store/authSlice";
+
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
 const App = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    authService.getCurrentUser()
-    .then(userData => {
+    authService.getCurrentUser().then((userData) => {
       if (userData) {
-        dispatch(login({userData}))
+        dispatch(login({ userData }));
       } else {
-        dispatch(logout())
+        dispatch(logout());
       }
-    })
-    service.getAllData(config.appwriteCartCollectionId)
-    .then(cartItems => {
-      if (cartItems) {
-        dispatch(getCartItems(cartItems))
-      } else {
-        console.log("no cart items")
-      }
-    })
-  }, [])
+    });
+  }, []);
 
   return (
-    <div>
+    <>
       <Navbar />
       <main>
         <Outlet />
       </main>
       <Footer />
-    </div>
-  )
-}
+    </>
+  );
+};
 
-export default App
+export default App;

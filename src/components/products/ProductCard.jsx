@@ -3,7 +3,7 @@ import { FaShoppingCart, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ handleCart, product }) => {
-  const { name, imageURL, price, rating, id, description } = product;
+  const { name, imageURL, price, Rating, id, description } = product;
 
   return (
     <div className="sm:max-w-[280px] w-full flex flex-col justify-between p-4 max-sm:px-8  rounded-lg hover:shadow-2xl hover:shadow-gray-300 duration-200 font-roboto md:h-[420px]">
@@ -21,12 +21,12 @@ const ProductCard = ({ handleCart, product }) => {
               {name?.length < 40 ? name : `${name?.slice(0, 40)}...`}
             </h3>
             <span className="flex items-center">
-              <FaStar className="text-green-600" /> {rating}
+              <FaStar className="text-green-600" /> ({Rating})
             </span>
           </div>
           <p className="md:text-xs text-sm text-gray-500">
             {" "}
-            {`${description?.slice(0, 100)}...`}
+            {`${description?.slice(0, 60)}...`}
           </p>
           <p className="font-bebasNeue text-2xl my-1">
             <strike className="text-lg text-gray-600 mr-2">

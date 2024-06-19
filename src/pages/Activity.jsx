@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import DropDownPlaces from "../components/DropDownPlaces";
 import Container from "../components/Container";
 import ActivityCard from "../components/ActivityCard";
 import { getAdventures } from "../store/adventureSlice";
 import { useSelector } from "react-redux";
-import service from "../utils/database";
 import config from "../config/config";
+import useFetch from "../hooks/useFetch";
+import SkeletonProduct from "../components/SkeletonProduct";
 
 const Activity = () => {
   const locations = [
@@ -16,22 +16,11 @@ const Activity = () => {
     "Massorie, Utrakhand",
     "Dharamshala, Himachal Pradesh",
   ];
-  const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const getProductItems = async () => {
-      setIsLoading(true);
-      const products = await service.getAllData(
-        config.appwriteAdventureCollectionId
-      );
-      if (products) {
-        dispatch(getAdventures(products.documents));
-      }
-      setIsLoading(false);
-    };
-    getProductItems();
-  }, [dispatch]);
+  const { isLoading } = useFetch(
+    config.appwriteAdventureCollectionId,
+    getAdventures
+  );
 
   const { adventures } = useSelector((state) => state.adventures);
   return (
@@ -41,9 +30,17 @@ const Activity = () => {
         <DropDownPlaces products={locations} />
       </div>
       <div className="flex flex-wrap items-center justify-center gap-6">
-        {adventures?.map((adventure) => (
-          <ActivityCard key={adventure.$id} adventure={adventure} />
-        ))}
+        {isLoading ? (
+          <>
+            <SkeletonProduct />
+            <SkeletonProduct />
+            <SkeletonProduct />
+          </>
+        ) : (
+          adventures?.map((adventure) => (
+            <ActivityCard key={adventure.$id} adventure={adventure} />
+          ))
+        )}
       </div>
     </Container>
   );

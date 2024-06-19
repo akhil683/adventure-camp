@@ -16,7 +16,7 @@ const cartSlice = createSlice({
     },
     addToCart: (state, action) => {
       state.cartTotal = state.cartTotal + action.payload.price;
-      const existingCartItem = state.cartItems.find(
+      const existingCartItem = state.cartItems?.find(
         (cartItem) => cartItem.id === action.payload.id
       );
       if (existingCartItem) {
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
               )
             : cartItem
         );
-        service.updateData();
+        //service.updateData();
       } else {
         state.cartItems = [
           ...state.cartItems,

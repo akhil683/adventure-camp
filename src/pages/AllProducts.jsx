@@ -1,38 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ProductCard from "../components/products/ProductCard";
 import Container from "../components/Container";
 import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "../store/ProductSlice";
-import service from "../utils/database";
 import config from "../config/config";
 import SkeletonProduct from "../components/SkeletonProduct";
 import { addToCart } from "../store/CartSlice";
+import useFetch from "../hooks/useFetch";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading } = useFetch(
+    config.appwriteProductCollectionId,
+    setProducts
+  );
   const { Products } = useSelector((state) => state.Products);
 
   const handleCart = (item) => {
     dispatch(addToCart(item));
     toast.success("Added to the Cart !");
   };
-
-  useEffect(() => {
-    const getProductItems = async () => {
-      setIsLoading(true);
-      const products = await service.getAllData(
-        config.appwriteProductCollectionId
-      );
-      console.log(products?.documents);
-      if (products) {
-        dispatch(setProducts(products.documents));
-      }
-      setIsLoading(false);
-    };
-    getProductItems();
-  }, [dispatch]);
 
   return (
     <Container>

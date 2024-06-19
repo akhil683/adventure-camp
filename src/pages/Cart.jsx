@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "../components/Container";
 import CartItem from "../components/CartItem";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { addToCart, getCartItems } from "../store/CartSlice";
+import useFetch from "../hooks/useFetch";
+import config from "../config/config";
+import SkeletonProduct from "../components/SkeletonProduct";
 
 const Cart = () => {
   const navigate = useNavigate();
   const { cartItems, cartTotal } = useSelector((state) => state.cart);
+  const { isLoading } = useFetch(config.appwriteCartCollectionId, getCartItems);
+  console.log(cartItems);
   const total = cartTotal - cartTotal * 0.1 + cartTotal * 0.15 + 4;
 
   return (
     <Container>
       <div className="flex max-md:flex-col gap-6 pt-12">
         <div className="md:w-[70%] min-h-300px flex flex-col items-center w-full">
-          {cartItems.length ? (
+          {isLoading ? (
+            <>
+              <SkeletonProduct />
+              <SkeletonProduct />
+              <SkeletonProduct />
+            </>
+          ) : cartItems?.length ? (
             cartItems?.map((cartItem) => (
               <CartItem cartItem={cartItem} key={cartItem.id} />
             ))
