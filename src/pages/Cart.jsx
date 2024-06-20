@@ -1,18 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Container from "../components/Container";
 import CartItem from "../components/CartItem";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { addToCart, getCartItems } from "../store/CartSlice";
+import { getCartItems } from "../store/CartSlice";
 import useFetch from "../hooks/useFetch";
 import config from "../config/config";
 import SkeletonProduct from "../components/SkeletonProduct";
+import PaymentForm from "../components/Payment-form/PaymentForm";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { cartItems, cartTotal } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
   const { isLoading } = useFetch(config.appwriteCartCollectionId, getCartItems);
-  console.log(cartItems);
+
+  const cartTotal = cartItems.reduce((total, current) => {
+    const currentItemPrice = current.price;
+    return total + currentItemPrice;
+  }, 0);
   const total = cartTotal - cartTotal * 0.1 + cartTotal * 0.15 + 4;
 
   return (
@@ -78,6 +83,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      <PaymentForm />
     </Container>
   );
 };

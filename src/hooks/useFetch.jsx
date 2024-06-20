@@ -12,7 +12,6 @@ const useFetch = (id, setData) => {
       setIsLoading(true);
       try {
         const data = await service.getAllData(id);
-        console.log(data.documents);
         if (data) {
           dispatch(setData(data.documents));
         }
