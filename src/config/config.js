@@ -15,5 +15,7 @@ const config = {
     import.meta.env.VITE_APPWRITE_ADVENTURES_COLLECTION_ID
   ),
   appwriteBucketId: String(import.meta.env.VITE_APPWRITE_BUCKET_ID),
+  stripePublishKey: String(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY),
 };
+
 export default config;

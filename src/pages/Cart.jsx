@@ -20,6 +20,24 @@ const Cart = () => {
   }, 0);
   const total = cartTotal - cartTotal * 0.1 + cartTotal * 0.15 + 4;
 
+  const checkoutHandler = async () => {
+    await fetch("http://localhost:4000/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ item: cartItems }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        if (response.url) {
+          window.location.assign(response.url);
+        }
+      });
+  };
+
   return (
     <Container>
       <div className="flex max-md:flex-col gap-6 pt-12">
@@ -71,7 +89,10 @@ const Cart = () => {
             <p className="text-xs mt-2 text-red-600">
               Free shipping above $200 purchase
             </p>
-            <button className="mt-8 uppercase bg-black text-white hover:bg-green-600 px-4 py-3 rounded-lg duration-200 w-full">
+            <button
+              onClick={checkoutHandler}
+              className="mt-8 uppercase bg-black text-white hover:bg-green-600 px-4 py-3 rounded-lg duration-200 w-full"
+            >
               Checkout
             </button>
             <button
