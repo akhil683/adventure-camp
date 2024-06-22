@@ -3,16 +3,21 @@ import Container from "../components/Container";
 import CartItem from "../components/CartItem";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { addToCart, getCartItems } from "../store/CartSlice";
+import { getCartItems } from "../store/CartSlice";
 import useFetch from "../hooks/useFetch";
 import config from "../config/config";
 import SkeletonProduct from "../components/SkeletonProduct";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { cartItems, cartTotal } = useSelector((state) => state.cart);
-  const { isLoading } = useFetch(config.appwriteCartCollectionId, getCartItems);
-  console.log(cartItems);
+  const { cartItems } = useSelector((state) => state.cart);
+  const { isLoading, data } = useFetch(config.appwriteCartCollectionId);
+  getCartItems(data);
+
+  const cartTotal = cartItems.reduce((total, currentItem) => {
+    const currentItemPrice = currentItem.price;
+    return total + currentItem.quantity * currentItemPrice;
+  }, 0);
   const total = cartTotal - cartTotal * 0.1 + cartTotal * 0.15 + 4;
 
   return (

@@ -1,31 +1,18 @@
-import { useEffect, useState } from "react";
 import service from "../utils/database";
-import { useDispatch } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
 
-const useFetch = (id, setData) => {
-  const [isLoading, setIsLoading] = useState();
-  const [error, setError] = useState("");
-  const dispatch = useDispatch();
+const useFetch = (id, querykey) => {
+  const fetchData = async () => {
+    const data = await service.getAllData(id);
+    return data.documents;
+  };
+  const { isLoading, error, data } = useQuery({
+    queryKey: [querykey],
+    queryFn: fetchData,
+    staleTime: 100000,
+  });
 
-  useEffect(() => {
-    const getData = async () => {
-      setIsLoading(true);
-      try {
-        const data = await service.getAllData(id);
-        console.log(data.documents);
-        if (data) {
-          dispatch(setData(data.documents));
-        }
-      } catch (err) {
-        alert("Error:: " + err);
-        setError(err);
-      }
-      setIsLoading(false);
-    };
-    getData();
-  }, [dispatch]);
-
-  return { isLoading, error };
+  return { isLoading, error, data };
 };
 
 export default useFetch;

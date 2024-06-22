@@ -2,8 +2,7 @@ import React from "react";
 import ProductCard from "../components/products/ProductCard";
 import Container from "../components/Container";
 import toast, { Toaster } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { setProducts } from "../store/ProductSlice";
+import { useDispatch } from "react-redux";
 import config from "../config/config";
 import SkeletonProduct from "../components/SkeletonProduct";
 import { addToCart } from "../store/CartSlice";
@@ -11,11 +10,11 @@ import useFetch from "../hooks/useFetch";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
-  const { isLoading } = useFetch(
-    config.appwriteProductCollectionId,
-    setProducts
-  );
-  const { Products } = useSelector((state) => state.Products);
+  const {
+    isLoading,
+    error,
+    data: Products,
+  } = useFetch(config.appwriteProductCollectionId, "Products");
 
   const handleCart = (item) => {
     dispatch(addToCart(item));

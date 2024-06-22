@@ -4,7 +4,6 @@ import config from "../config/config";
 
 const initialState = {
   cartItems: [],
-  cartTotal: 0,
 };
 
 const cartSlice = createSlice({
@@ -15,7 +14,6 @@ const cartSlice = createSlice({
       state.cartItems = action.payload.documents;
     },
     addToCart: (state, action) => {
-      state.cartTotal = state.cartTotal + action.payload.price;
       const existingCartItem = state.cartItems?.find(
         (cartItem) => cartItem.id === action.payload.id
       );
@@ -31,7 +29,6 @@ const cartSlice = createSlice({
               )
             : cartItem
         );
-        //service.updateData();
       } else {
         state.cartItems = [
           ...state.cartItems,
@@ -72,8 +69,6 @@ const cartSlice = createSlice({
     },
     updateQuantity: (state) => {},
     deleteItem: (state, action) => {
-      state.cartTotal =
-        state.cartTotal - action.payload.price * action.payload.quantity;
       service.deleteData(action.payload.$id, config.appwriteCartCollectionId);
       state.cartItems = state.cartItems.filter(
         (cartItem) => cartItem.id !== action.payload.id

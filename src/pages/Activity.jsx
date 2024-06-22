@@ -19,7 +19,8 @@ const Activity = () => {
 
   const { isLoading } = useFetch(
     config.appwriteAdventureCollectionId,
-    getAdventures
+    getAdventures,
+    "Adventures"
   );
 
   const { adventures } = useSelector((state) => state.adventures);
