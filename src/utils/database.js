@@ -1,5 +1,6 @@
 import config from "../config/config";
-import { Client, Databases, Storage, Query, ID } from "appwrite";
+import { Query } from "appwrite";
+import { Client, Databases, Storage, ID } from "appwrite";
 
 export class Service {
   client = new Client();
@@ -15,18 +16,28 @@ export class Service {
     this.bucket = new Storage(this.client);
   }
 
-  async getData(slug) {
+  async getData(collectionId, slug) {
     try {
       return await this.databases.getDocument(
         config.appwriteDatabaseId,
-        config.appwriteProductCollectionId,
+        collectionId,
         slug
       );
     } catch (err) {
       console.log("Appwrite service:: getPost():: ", err);
     }
   }
-
+  async getQueryData(collectionId, query) {
+    try {
+      return await this.databases.listDocuments(
+        config.appwriteDatabaseId,
+        collectionId,
+        query
+      );
+    } catch (err) {
+      console.log("Appwrite service:: getQueryData():: ", err);
+    }
+  }
   async getAllData(collectionId) {
     try {
       return await this.databases.listDocuments(

@@ -11,7 +11,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     getCartItems: (state, action) => {
-      state.cartItems = action.payload.documents;
+      state.cartItems = action.payload;
     },
     addToCart: (state, action) => {
       const existingCartItem = state.cartItems?.find(
@@ -63,7 +63,6 @@ const cartSlice = createSlice({
           },
           config.appwriteCartCollectionId
         );
-        console.log(action.payload);
       }
       console.log(state.cartItems);
     },

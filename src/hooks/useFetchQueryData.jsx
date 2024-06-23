@@ -1,16 +1,19 @@
-import service from "../utils/database";
 import { useQuery } from "@tanstack/react-query";
+import service from "../utils/database";
 
-const useFetch = (collectionId, querykey) => {
+const useFetchQueryData = (collectionId, querykey, query) => {
   const fetchData = async () => {
-    const data = await service.getAllData(collectionId);
+    const data = await service.getQueryData(collectionId, query);
     return data.documents;
   };
+
   const { isLoading, error, data } = useQuery({
     queryKey: [querykey],
     queryFn: fetchData,
+    staleTime: 100000,
   });
+
   return { isLoading, error, data };
 };
 
-export default useFetch;
+export default useFetchQueryData;

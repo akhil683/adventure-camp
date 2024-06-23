@@ -1,12 +1,11 @@
 import React from "react";
 import DropDownPlaces from "../components/DropDownPlaces";
-import Container from "../components/Container";
-import ActivityCard from "../components/ActivityCard";
-import { getAdventures } from "../store/adventureSlice";
-import { useSelector } from "react-redux";
+import Container from "../components/Layout/Container";
+import ActivityCard from "../components/Cards/ActivityCard";
 import config from "../config/config";
-import useFetch from "../hooks/useFetch";
-import SkeletonProduct from "../components/SkeletonProduct";
+import SkeletonProduct from "../components/Layout/SkeletonProduct";
+import { Query } from "appwrite";
+import useFetchQueryData from "../hooks/useFetchQueryData";
 
 const Activity = () => {
   const locations = [
@@ -17,13 +16,12 @@ const Activity = () => {
     "Dharamshala, Himachal Pradesh",
   ];
 
-  const { isLoading } = useFetch(
+  const { isLoading, data: adventures } = useFetchQueryData(
     config.appwriteAdventureCollectionId,
-    getAdventures,
-    "Adventures"
+    "Adventures",
+    [Query.equal("type", ["activity"])]
   );
 
-  const { adventures } = useSelector((state) => state.adventures);
   return (
     <Container>
       <div className="flex justify-between flex-wrap items-center py-12 px-20 max-md:px-4 pb-4">

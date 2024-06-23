@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ActivityCard from "../components/ActivityCard";
+import ActivityCard from "../components/Cards/ActivityCard";
 import service from "../utils/database";
 import config from "../config/config";
 import { useDispatch } from "react-redux";

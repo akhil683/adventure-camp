@@ -1,23 +1,31 @@
-import React, { useEffect } from "react";
-import Container from "../components/Container";
-import CartItem from "../components/CartItem";
+import React from "react";
+import Container from "../components/Layout/Container";
+import CartItem from "../components/Cards/CartItem";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCartItems } from "../store/CartSlice";
-import useFetch from "../hooks/useFetch";
 import config from "../config/config";
-import SkeletonProduct from "../components/SkeletonProduct";
+import SkeletonProduct from "../components/Layout/SkeletonProduct";
+import { Query } from "appwrite";
+import useFetchQueryData from "../hooks/useFetchQueryData";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { cartItems } = useSelector((state) => state.cart);
-  const { isLoading, data } = useFetch(config.appwriteCartCollectionId);
-  getCartItems(data);
+  const dispatch = useDispatch();
+  const { userData } = useSelector((state) => state.auth);
 
-  const cartTotal = cartItems.reduce((total, currentItem) => {
+  const { isLoading, data: cartItems } = useFetchQueryData(
+    config.appwriteCartCollectionId,
+    "cartItems",
+    [Query.equal("userID", [userData?.$id])]
+  );
+  dispatch(getCartItems(cartItems));
+
+  const cartTotal = cartItems?.reduce((total, currentItem) => {
     const currentItemPrice = currentItem.price;
     return total + currentItem.quantity * currentItemPrice;
   }, 0);
+
   const total = cartTotal - cartTotal * 0.1 + cartTotal * 0.15 + 4;
 
   return (
@@ -32,7 +40,7 @@ const Cart = () => {
             </>
           ) : cartItems?.length ? (
             cartItems?.map((cartItem) => (
-              <CartItem cartItem={cartItem} key={cartItem.id} />
+              <CartItem cartItem={cartItem} key={cartItem.$id} />
             ))
           ) : (
             <h1 className="text-5xl font-semibold text-center my-[10vh]">

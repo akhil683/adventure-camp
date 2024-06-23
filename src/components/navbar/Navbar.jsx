@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/logo.png";
+import Logo from "../../assets/logo.png";
 
 import { FaHeart } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
@@ -8,7 +8,7 @@ import { CgMenuRight } from "react-icons/cg";
 import MobileMenu from "./MobileMenu";
 import { useSelector } from "react-redux";
 
-import LogOutBtn from "./LogOutBtn.jsx";
+import LogOutBtn from "../LogOutBtn";
 
 const Navbar = () => {
   const { status } = useSelector((state) => state.auth);

@@ -1,10 +1,9 @@
 import React from "react";
-import Img from "../assets/campingImg.jpg";
 import ReactStars from "react-rating-stars-component";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteItem } from "../store/CartSlice";
+import { deleteItem } from "../../store/CartSlice";
 
 const CartItem = ({ cartItem }) => {
   const quantities = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -13,7 +12,8 @@ const CartItem = ({ cartItem }) => {
   const removeHandler = () => {
     dispatch(deleteItem(cartItem));
   };
-  const { name, price, actualPrice, Brand, Rating, rated, quantity } = cartItem;
+  const { name, price, actualPrice, Brand, Rating, rated, quantity, imageURL } =
+    cartItem;
 
   return (
     <Link
@@ -21,7 +21,7 @@ const CartItem = ({ cartItem }) => {
       className="w-full flex md:p-2  md:mb-4 mb-6 rounded-lg hover:bg-gray-100 duration-200"
     >
       <div className="md:w-[30%] w-[100px] h-[100px] md:h-[150px] rounded-lg overflow-hidden">
-        <img src={Img} alt="" className="w-full h-full object-cover" />
+        <img src={imageURL} alt="" className="w-full h-full object-cover" />
       </div>
       <div className="w-[70%] px-2">
         <div className="flex justify-between">

@@ -1,15 +1,16 @@
 import React from "react";
 import ProductCard from "../components/products/ProductCard";
-import Container from "../components/Container";
+import Container from "../components/Layout/Container";
 import toast, { Toaster } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import config from "../config/config";
-import SkeletonProduct from "../components/SkeletonProduct";
+import SkeletonProduct from "../components/Layout/SkeletonProduct";
 import { addToCart } from "../store/CartSlice";
 import useFetch from "../hooks/useFetch";
-
 const AllProducts = () => {
   const dispatch = useDispatch();
+  const { userData } = useSelector((state) => state.auth);
+
   const {
     isLoading,
     error,
@@ -17,7 +18,8 @@ const AllProducts = () => {
   } = useFetch(config.appwriteProductCollectionId, "Products");
 
   const handleCart = (item) => {
-    dispatch(addToCart(item));
+    console.log({ ...item, userID: userData.$id });
+    dispatch(addToCart({ ...item, userID: userData.$id }));
     toast.success("Added to the Cart !");
   };
 

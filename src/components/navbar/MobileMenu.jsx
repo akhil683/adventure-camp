@@ -5,23 +5,21 @@ import { RxCross2 } from "react-icons/rx";
 import { MdCardTravel, MdOutlineLogin } from "react-icons/md";
 import { TbActivityHeartbeat, TbTruckDelivery } from "react-icons/tb";
 import { RiMotorbikeFill } from "react-icons/ri";
-import LogOutBtn from "./LogOutBtn";
-import logo from "../assets/logo.png";
-import authService from "../utils/auth";
+import LogOutBtn from "../LogOutBtn";
+import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../store/authSlice";
 
 const MobileMenu = ({ showMenu, toggleMenu }) => {
-  const { status, userData } = useSelector(state => state.auth)
-  const dispatch = useDispatch()
+  const { status, userData } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const show = showMenu ? "right-0" : "-right-[100%]";
   const bgShow = showMenu ? "block" : "hidden";
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // const handleLogOut = () => {
   //   dispatch(logout())
-  //   navigate("/") 
+  //   navigate("/")
   // }
 
   return (
@@ -80,20 +78,20 @@ const MobileMenu = ({ showMenu, toggleMenu }) => {
             </Link>
           </li>
           <li>
-            <Link 
-            onClick={toggleMenu}
-               to="/rent-vehicles" 
-               className="flex py-2 gap-2 items-center"
+            <Link
+              onClick={toggleMenu}
+              to="/rent-vehicles"
+              className="flex py-2 gap-2 items-center"
             >
               <RiMotorbikeFill className="text-2xl" />
               Vehicles
             </Link>
           </li>
           <li>
-            <Link 
-               onClick={toggleMenu} 
-               to="/orders" 
-               className="flex py-2 gap-2 items-center"
+            <Link
+              onClick={toggleMenu}
+              to="/orders"
+              className="flex py-2 gap-2 items-center"
             >
               <TbTruckDelivery className="text-2xl" />
               Orders

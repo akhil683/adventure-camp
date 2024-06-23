@@ -7,7 +7,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 
-import ProtectedLayout from "./components/ProtectLayout.jsx";
+import ProtectedLayout from "./components/Layout/ProtectLayout.jsx";
+
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
@@ -21,9 +22,16 @@ import BookingDetail from "./pages/BookingDetail.jsx";
 import Wishlist from "./pages/Wishlist.jsx";
 import { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { Query } from "appwrite";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60,
+    },
+  },
+});
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -138,6 +146,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Provider>
   </React.StrictMode>
