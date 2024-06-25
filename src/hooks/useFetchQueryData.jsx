@@ -10,7 +10,7 @@ const useFetchQueryData = (collectionId, querykey, query) => {
   const { isLoading, error, data } = useQuery({
     queryKey: [querykey],
     queryFn: fetchData,
-    staleTime: 100000,
+    staleTime: 10000,
   });
 
   return { isLoading, error, data };

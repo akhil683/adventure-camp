@@ -1,4 +1,3 @@
-import React from "react";
 import DropDownPlaces from "../components/DropDownPlaces";
 import Container from "../components/Layout/Container";
 import ActivityCard from "../components/Cards/ActivityCard";
@@ -6,6 +5,8 @@ import config from "../config/config";
 import SkeletonProduct from "../components/Layout/SkeletonProduct";
 import { Query } from "appwrite";
 import useFetchQueryData from "../hooks/useFetchQueryData";
+import { useDispatch } from "react-redux";
+import { setAdventures } from "../store/adventureSlice";
 
 const Activity = () => {
   const locations = [
@@ -15,12 +16,13 @@ const Activity = () => {
     "Massorie, Utrakhand",
     "Dharamshala, Himachal Pradesh",
   ];
-
+  const dispatch = useDispatch();
   const { isLoading, data: adventures } = useFetchQueryData(
     config.appwriteAdventureCollectionId,
     "Adventures",
-    [Query.equal("type", ["activity"])]
+    [Query.equal("type", ["activity"])],
   );
+  dispatch(setAdventures(adventures));
 
   return (
     <Container>

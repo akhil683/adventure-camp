@@ -1,4 +1,3 @@
-import React from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
@@ -17,4 +16,3 @@ const DropDownPlaces = ({ products }) => {
 };
 
 export default DropDownPlaces;
-

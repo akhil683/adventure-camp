@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MdLocationOn } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
@@ -9,10 +9,11 @@ const BookingDetail = () => {
   const { adventures } = useSelector((state) => state.adventures);
   const [adventure, setAdventure] = useState({});
   console.log(adventures);
+
   useEffect(() => {
     const getProduct = () => {
       const adventureInfo = adventures?.find(
-        (adventure) => adventure?.$id === id
+        (adventure) => adventure?.$id === id,
       );
       setAdventure(adventureInfo);
     };

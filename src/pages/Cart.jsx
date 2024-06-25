@@ -14,13 +14,13 @@ const Cart = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.auth);
 
-  const { isLoading, data: cartItems } = useFetchQueryData(
+  const { isLoading, data } = useFetchQueryData(
     config.appwriteCartCollectionId,
     "cartItems",
-    [Query.equal("userID", [userData?.$id])]
+    [Query.equal("userID", [userData?.$id])],
   );
-  dispatch(getCartItems(cartItems));
-
+  dispatch(getCartItems(data));
+  const { cartItems } = useSelector((state) => state.cart);
   const cartTotal = cartItems?.reduce((total, currentItem) => {
     const currentItemPrice = currentItem.price;
     return total + currentItem.quantity * currentItemPrice;

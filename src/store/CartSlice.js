@@ -15,19 +15,19 @@ const cartSlice = createSlice({
     },
     addToCart: (state, action) => {
       const existingCartItem = state.cartItems?.find(
-        (cartItem) => cartItem.id === action.payload.id
+        (cartItem) => cartItem.id === action.payload.id,
       );
       if (existingCartItem) {
         state.cartItems = state.cartItems.map((cartItem) =>
-          cartItem.id === action.payload.id
+          cartItem.$id === action.payload.$id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }(
                 service.updateData(
-                  cartItem.id,
+                  cartItem.$id,
                   cartItem,
-                  config.appwriteCartCollectionId
-                )
+                  config.appwriteCartCollectionId,
+                ),
               )
-            : cartItem
+            : cartItem,
         );
       } else {
         state.cartItems = [
@@ -45,7 +45,7 @@ const cartSlice = createSlice({
           id,
           imageURL,
           rated,
-          userID = "123sdjfk",
+          userID,
         } = action.payload;
         service.createData(
           {
@@ -61,17 +61,19 @@ const cartSlice = createSlice({
             rated,
             userID,
           },
-          config.appwriteCartCollectionId
+          config.appwriteCartCollectionId,
         );
       }
       console.log(state.cartItems);
     },
     updateQuantity: (state) => {},
+
     deleteItem: (state, action) => {
-      service.deleteData(action.payload.$id, config.appwriteCartCollectionId);
       state.cartItems = state.cartItems.filter(
-        (cartItem) => cartItem.id !== action.payload.id
+        (cartItem) => cartItem.$id !== action.payload.$id,
       );
+      console.log(state.cartItems);
+      service.deleteData(action.payload.$id, config.appwriteCartCollectionId);
     },
   },
 });
