@@ -2,7 +2,6 @@
   "name": "adventure-camp",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,8 +12,9 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
     "@stripe/react-stripe-js": "^2.7.1",
-    "@stripe/stripe-js": "^4.0.0",
     "appwrite": "^14.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
     "framer-motion": "^11.2.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -24,7 +24,8 @@
     "react-rating-stars-component": "^2.2.0",
     "react-redux": "^9.1.2",
     "react-router-dom": "^6.23.1",
-    "react-status-alert": "^1.3.2"
+    "react-status-alert": "^1.3.2",
+    "stripe": "^16.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

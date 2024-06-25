@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import service from "../utils/database";
 import config from "../config/config";
-
 const initialState = {
   cartItems: [],
 };
@@ -14,22 +13,22 @@ const cartSlice = createSlice({
       state.cartItems = action.payload;
     },
     addToCart: (state, action) => {
+      console.log(action.payload);
       const existingCartItem = state.cartItems?.find(
-        (cartItem) => cartItem.id === action.payload.id
+        (cartItem) => cartItem.id === action.payload.id,
       );
       if (existingCartItem) {
         state.cartItems = state.cartItems.map((cartItem) =>
-          cartItem.id === action.payload.id
+          cartItem.id === action.payload.kid
             ? { ...cartItem, quantity: cartItem.quantity + 1 }(
                 service.updateData(
                   cartItem.id,
                   cartItem,
-                  config.appwriteCartCollectionId
-                )
+                  config.appwriteCartCollectionId,
+                ),
               )
-            : cartItem
+            : cartItem,
         );
-        //service.updateData();
       } else {
         state.cartItems = [
           ...state.cartItems,
@@ -46,7 +45,8 @@ const cartSlice = createSlice({
           id,
           imageURL,
           rated,
-          userID = "123sdjfk",
+          userID,
+          priceID,
         } = action.payload;
         service.createData(
           {
@@ -61,20 +61,18 @@ const cartSlice = createSlice({
             imageURL,
             rated,
             userID,
+            priceID,
           },
-          config.appwriteCartCollectionId
+          config.appwriteCartCollectionId,
         );
         console.log(action.payload);
       }
       console.log(state.cartItems);
     },
-    updateQuantity: (state) => {},
     deleteItem: (state, action) => {
-      state.cartTotal =
-        state.cartTotal - action.payload.price * action.payload.quantity;
       service.deleteData(action.payload.$id, config.appwriteCartCollectionId);
       state.cartItems = state.cartItems.filter(
-        (cartItem) => cartItem.id !== action.payload.id
+        (cartItem) => cartItem.id !== action.payload.id,
       );
     },
   },

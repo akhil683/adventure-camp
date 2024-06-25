@@ -13,12 +13,13 @@ const AllProducts = () => {
   const dispatch = useDispatch();
   const { isLoading } = useFetch(
     config.appwriteProductCollectionId,
-    setProducts
+    setProducts,
   );
   const { Products } = useSelector((state) => state.Products);
+  const { userData } = useSelector((state) => state.auth);
 
   const handleCart = (item) => {
-    dispatch(addToCart(item));
+    dispatch(addToCart({ ...item, userID: userData.$id }));
     toast.success("Added to the Cart !");
   };
 
