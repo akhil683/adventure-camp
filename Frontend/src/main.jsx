@@ -23,6 +23,7 @@ import Wishlist from "./pages/Wishlist.jsx";
 import { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Address from "./components/address.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -110,6 +111,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedLayout authentication={true}>
             <Orders />
+          </ProtectedLayout>
+        ),
+      },
+      {
+        path: "/address",
+        element: (
+          <ProtectedLayout authentication={false}>
+            <Address />
           </ProtectedLayout>
         ),
       },

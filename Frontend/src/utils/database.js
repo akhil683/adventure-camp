@@ -1,5 +1,4 @@
 import config from "../config/config";
-import { Query } from "appwrite";
 import { Client, Databases, Storage, ID } from "appwrite";
 
 export class Service {
@@ -21,7 +20,7 @@ export class Service {
       return await this.databases.getDocument(
         config.appwriteDatabaseId,
         collectionId,
-        slug
+        slug,
       );
     } catch (err) {
       console.log("Appwrite service:: getPost():: ", err);
@@ -32,7 +31,7 @@ export class Service {
       return await this.databases.listDocuments(
         config.appwriteDatabaseId,
         collectionId,
-        query
+        query,
       );
     } catch (err) {
       console.log("Appwrite service:: getQueryData():: ", err);
@@ -42,7 +41,7 @@ export class Service {
     try {
       return await this.databases.listDocuments(
         config.appwriteDatabaseId,
-        collectionId
+        collectionId,
       );
     } catch (err) {
       console.log("Appwrite service:: getAllData():: ", err);
@@ -54,7 +53,7 @@ export class Service {
         config.appwriteDatabaseId,
         collectionId,
         ID.unique(),
-        data
+        data,
       );
     } catch (err) {
       console.log("Appwrite service:: createData():: ", err);
@@ -66,7 +65,7 @@ export class Service {
         config.appwriteDatabaseId,
         collectionId,
         id,
-        data
+        data,
       );
     } catch (err) {
       console.log("Appwrite service:: updatePost():: ", err);
@@ -77,7 +76,7 @@ export class Service {
       await this.databases.deleteDocument(
         config.appwriteDatabaseId,
         collectionId,
-        $id
+        $id,
       );
       return true;
     } catch (err) {
@@ -91,7 +90,7 @@ export class Service {
       return await this.bucket.createFile(
         config.appwriteBucketId,
         ID.unique(),
-        file
+        file,
       );
     } catch (err) {
       console.log("Appwrite service:: uploadFile():: ", err);

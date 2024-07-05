@@ -22,7 +22,7 @@ const Cart = () => {
   const total = cartTotal - cartTotal * 0.1 + cartTotal * 0.15 + 4;
 
   const checkoutHandler = async () => {
-    await fetch("http://localhost:4000/checkout", {
+    await fetch("/checkout-session", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
